@@ -11,9 +11,12 @@ import org.bukkit.persistence.PersistentDataType
 /** Loaded through the component capability boundary, never by legacy module verification. */
 internal class PublicSwordComponents : PaperSwordBlocking.Components {
     private val marker = NamespacedKey("oldcombatmechanics", "sword_consumable")
+    // Never finishes, as the legacy path: bread's 1.6 s let a held block eat the sword
     private val blocking =
-        (ItemStack(Material.BREAD).getData(CONSUMABLE)?.toBuilder() ?: Consumable.consumable().consumeSeconds(1.6f))
+        Consumable.consumable()
+            .consumeSeconds(Float.MAX_VALUE)
             .animation(ItemUseAnimation.BLOCK)
+            .hasConsumeParticles(false)
             .build()
 
     init {

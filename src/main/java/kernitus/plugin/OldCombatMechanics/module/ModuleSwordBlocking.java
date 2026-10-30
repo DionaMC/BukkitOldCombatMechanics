@@ -282,6 +282,12 @@ public class ModuleSwordBlocking extends OCMModule {
         }
     }
 
+    // A sword is never food: whatever consumable it carries for the blocking animation must not finish
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onConsume(org.bukkit.event.player.PlayerItemConsumeEvent e) {
+        if (isHoldingSword(e.getItem().getType())) e.setCancelled(true);
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockCanBuildEvent e) {
         if (e.isBuildable()) return;
