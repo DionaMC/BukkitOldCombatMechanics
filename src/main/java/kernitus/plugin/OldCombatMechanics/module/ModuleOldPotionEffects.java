@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.ConfigUtils;
 import kernitus.plugin.OldCombatMechanics.utilities.Messenger;
@@ -221,7 +222,7 @@ public class ModuleOldPotionEffects extends OCMModule {
         if (!(entity instanceof LivingEntity)) return;
         final LivingEntity livingEntity = (LivingEntity) entity;
 
-        if (livingEntity instanceof OfflinePlayer && !((OfflinePlayer) livingEntity).isOnline()) {
+        if (livingEntity instanceof OfflinePlayer && !Players.isPresent((OfflinePlayer) livingEntity)) {
             WeaknessCompensation.remove(livingEntity);
             return;
         }

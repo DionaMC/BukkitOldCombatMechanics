@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import kernitus.plugin.OldCombatMechanics.api.PlayerModuleOverride;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.Config;
@@ -70,7 +71,7 @@ public abstract class OCMModule implements Listener {
      * Whether this module should be enabled for this player given his current modeset
      */
     public boolean isEnabled(@NotNull HumanEntity humanEntity) {
-        if (humanEntity instanceof OfflinePlayer && !((OfflinePlayer) humanEntity).isOnline()) {
+        if (humanEntity instanceof OfflinePlayer && !Players.isPresent((OfflinePlayer) humanEntity)) {
             return false;
         }
 

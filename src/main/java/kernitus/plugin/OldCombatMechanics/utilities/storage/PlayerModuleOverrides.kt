@@ -7,6 +7,7 @@ package kernitus.plugin.OldCombatMechanics.utilities.storage
 
 import kernitus.plugin.OldCombatMechanics.ModuleLoader
 import kernitus.plugin.OldCombatMechanics.api.PlayerModuleOverride
+import kernitus.plugin.OldCombatMechanics.utilities.Players
 import org.bukkit.OfflinePlayer
 import org.bukkit.entity.HumanEntity
 import java.util.UUID
@@ -70,7 +71,7 @@ object PlayerModuleOverrides {
     private fun requireOnline(human: HumanEntity) {
         val isOnline =
             when (human) {
-                is OfflinePlayer -> human.isOnline
+                is OfflinePlayer -> Players.isPresent(human)
                 else -> true // HumanEntity (e.g. a living NPC) — assume present in world
             }
         require(isOnline) { "HumanEntity ${human.name} is not online" }

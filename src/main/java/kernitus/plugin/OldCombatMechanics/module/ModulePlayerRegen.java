@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import com.cryptomorin.xseries.XAttribute;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.regen.LegacyRegenerationTracker;
@@ -142,7 +143,7 @@ public class ModulePlayerRegen extends OCMModule {
                 pending.remove(charge);
                 if (pending.isEmpty()) pendingCharges.remove(uuid);
             }
-            if (charge.handled || exhaustionEventAvailable || !player.isOnline()) return;
+            if (charge.handled || exhaustionEventAvailable || !Players.isPresent(player)) return;
             // FoodMetaData adds after the event, including cancelled heals. Correct before
             // the next native food tick, retaining later plugin additions. At the cap of 40,
             // indistinguishable foreign additions remain an explicit fallback limitation.

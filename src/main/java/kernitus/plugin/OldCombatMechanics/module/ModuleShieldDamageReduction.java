@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.damage.CombatDamageProvenance;
 import kernitus.plugin.OldCombatMechanics.utilities.damage.BlockingDamageRecalculation;
@@ -149,7 +150,7 @@ public class ModuleShieldDamageReduction extends OCMModule {
     }
 
     private static boolean isOfflinePlayerReference(Player player) {
-        return player instanceof OfflinePlayer && !((OfflinePlayer) player).isOnline();
+        return player instanceof OfflinePlayer && !Players.isPresent(player);
     }
 
     private void stopFullyBlockedCleanupTaskIfIdle() {

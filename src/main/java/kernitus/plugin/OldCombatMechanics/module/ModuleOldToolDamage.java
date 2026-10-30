@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.Messenger;
 import kernitus.plugin.OldCombatMechanics.utilities.damage.DamageUtils;
@@ -299,7 +300,7 @@ public class ModuleOldToolDamage extends OCMModule {
             if (pending.containsKey(player.getUniqueId())) return;
             pending.put(player.getUniqueId(), Bukkit.getScheduler().runTask(plugin, () -> {
                 pending.remove(player.getUniqueId());
-                if (player.isOnline()) applyToHeld(player);
+                if (Players.isPresent(player)) applyToHeld(player);
             }));
         }
 

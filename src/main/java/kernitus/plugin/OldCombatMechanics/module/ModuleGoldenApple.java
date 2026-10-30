@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import com.google.common.collect.ImmutableSet;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.Messenger;
@@ -237,7 +238,7 @@ public class ModuleGoldenApple extends OCMModule {
         Map<Player, Map<Material, ItemCooldown>> pendingBatch = new HashMap<>(pendingItemCooldowns);
         for (Map.Entry<Player, Map<Material, ItemCooldown>> entry : pendingBatch.entrySet()) {
             Player player = entry.getKey();
-            if (!player.isOnline() || !isEnabled(player)) {
+            if (!Players.isPresent(player) || !isEnabled(player)) {
                 pendingItemCooldowns.remove(player);
                 continue;
             }
@@ -266,7 +267,7 @@ public class ModuleGoldenApple extends OCMModule {
         while (players.hasNext()) {
             Map.Entry<Player, Map<Material, ItemCooldown>> entry = players.next();
             Player player = entry.getKey();
-            boolean active = player.isOnline() && !player.isDead() && isEnabled(player);
+            boolean active = Players.isPresent(player) && !player.isDead() && isEnabled(player);
             Iterator<Map.Entry<Material, ItemCooldown>> materials = entry.getValue().entrySet().iterator();
             while (materials.hasNext()) {
                 Map.Entry<Material, ItemCooldown> material = materials.next();

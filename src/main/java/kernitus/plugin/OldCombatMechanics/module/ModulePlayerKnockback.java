@@ -5,6 +5,7 @@
  */
 package kernitus.plugin.OldCombatMechanics.module;
 
+import kernitus.plugin.OldCombatMechanics.utilities.Players;
 import com.cryptomorin.xseries.XAttribute;
 import kernitus.plugin.OldCombatMechanics.OCMMain;
 import kernitus.plugin.OldCombatMechanics.utilities.damage.CombatDamageProvenance;
@@ -127,7 +128,7 @@ public class ModulePlayerKnockback extends OCMModule {
         if (!(entity instanceof Player) || netheriteKnockbackResistance)
             return;
         final Player damagee = (Player) entity;
-        if (!damagee.isOnline())
+        if (!Players.isPresent(damagee))
             return;
 
         // This depends on the attacker's combat mode
